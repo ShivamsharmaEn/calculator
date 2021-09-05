@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="./calculator.css">
+	<title></title>
+</head>
+<body>
+	 <script>
+	 	var history=[' ',' ',' ',' ',' ',' ',' ',' ',' ',' '];
+		var count=0;
+		var show1=-1;
+		//function that display value
+		function dis(val)
+		{
+			document.getElementById("inputtext").value+=val;
+		}
+		function show(val)
+		{	if(val=='H')
+				show1++;
+			else
+				show1--;
+			if(show1>=count || show1<0)
+			{
+				if(show1>=count)
+					document.getElementById("inputtext").value="NO HISTORY USE H-";
+				else 
+					document.getElementById("inputtext").value="NO HISTORY USE H+";
+				console.log(show1);
+			}
+			else
+				document.getElementById("inputtext").value=history[show1];
+
+		}
+		//function that evaluates the digit and return result
+		function solve()
+		{
+			let x = document.getElementById("inputtext").value;
+			try{
+			let y = eval(x);
+			if(count>9)
+				count=0;
+			history[count]=x;
+			console.log(history[count]);
+			console.log(count);
+			count++;
+
+			document.getElementById("inputtext").value = "";
+			document.getElementById("result").value=y;}
+			catch(err)
+			{
+				document.getElementById("result").value="SYNTAX ERROR";
+			}
+			
+		}
+		
+		//function that clear the display
+		function clr()
+		{
+			document.getElementById("inputtext").value = "";
+			document.getElementById("result").value="START";
+
+		}
+        function Del()
+        {
+            var num= document.getElementById("inputtext").value;
+            var stripped = num / 10 | 0;
+            document.getElementById("inputtext").value = stripped;
+        }
+	</script>
+	<div class="calculator"><div class="uppersection">
+		<div class="inputtext">
+			<input type="text" name="inputtext" class="display1" id="inputtext">
+		</div>
+		<div class="outputtext">
+			<div class="display2">
+				<p class="equ">=</p>
+				<input disabled="disabled"  class="answer" value="START" id="result">
+			</div>
+		</div>
+	</div>
+	<div class="lowersection">
+		<div class="row">
+			<div class="column">
+				<button class="ib" onclick="clr()">AC</button>
+			</div>
+			<div class="column">
+				<button class="ib" onclick="Del()">C</button>
+			</div>
+			<div class="column">
+				<button class="ib" onclick="dis('(')">(</button>
+			</div>
+			<div class="column">
+				<button class="ib" onclick="dis(')')">)</button>
+			</div>
+			<div class="column">
+				<button class="ib" onclick="dis('*')">*</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="column">
+				<button class="ib" onclick="dis('9')">9</button>
+			</div>
+			<div class="column">
+				<button class="ib"  onclick="dis('8')">8</button>
+			</div>
+			<div class="column">
+				<button class="ib"  onclick="dis('7')">7</button>
+			</div>
+			<div class="column">
+				<button class="ib" onclick="dis('+')">+</button>
+			</div>
+			<div class="column">
+				<button class="ib" onclick="dis('-')">-</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="column">
+				<button class="ib" onclick="dis('6')">6</button>
+			</div>
+			<div class="column">
+				<button class="ib" onclick="dis('5')">5</button>
+			</div>
+			<div class="column">
+				<button class="ib" onclick="dis('4')">4</button>
+			</div>
+			<div class="column">
+				<button class="ib" onclick="dis('/')">/</button>
+			</div>
+			<div class="column">
+				<button class="ib" onclick="dis('%')">%</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="column">
+				<button class="ib" onclick="dis('3')">3</button>
+			</div>
+			<div class="column">
+				<button class="ib" onclick="dis('2')">2</button>
+			</div>
+			<div class="column">
+				<button class="ib" onclick="dis('1')">1</button>
+			</div>
+			<div class="column">
+				<button class="ib" onclick="dis('.')">.</button>
+			</div>
+			<div class="column">
+				<button class="ib" onclick="solve()">=</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="column">
+				<button class="ib" onclick="dis('00')">00</button>
+			</div>
+			<div class="column">
+				<button class="ib" onclick="dis('0')">0</button>
+			</div>
+			<div class="column">
+				<button class="ib" onclick="dis('.00')">.00</button>
+			</div>
+			<div class="column">
+				<button class="ib" onclick="show('H')">H+</button>
+			</div>
+			<div class="column">
+				<button class="ib" onclick="show('a')">H-</button>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
